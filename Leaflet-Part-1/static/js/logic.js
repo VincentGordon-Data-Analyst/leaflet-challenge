@@ -44,27 +44,25 @@ d3.json(queryUrl).then(function (data) {
       color: colorPicker(depth),
       fillColor: colorPicker(depth),
       radius: markerSize(properties.mag)
-    }).bindPopup(`<h1>${properties.title}</h1>`).addTo(myMap);  
-      
-    
+    }).bindPopup(`<h3>${properties.title}</h3><hr><h4>${properties.place}</h4>`).addTo(myMap);  
   }
-  // geojson = L.circle([location[0], location[1]], {
-  //   radius: markerSize(features.properties.mag)
-  // });
 
+  var legend = L.control({position: "bottomright"});
 
-  // for (var i = 0; i < features.length; i++) {
-  //   var feature = features[i];
-  //   var coordinate = feature.geometry.coordinates;
+  legend.onAdd = function() {
+    var div = L.DomUtil.create('div', 'info legend'),
+    severity = [0, 5, 12, 25, 50, 100];
+    labels = [];
 
-  //   L.circle([coordinate[0], coordinate[1]], {
-  //     fillOpacity: 0.75,
-  //     color: "white",
-  //     fillColor: "purple",
-  //     radius: markerSize(feature.properties.mag)
-  //   }).bindPopup(`<h1>${feature.properties.title}</h1>`).addTo(myMap);    
-  // }
-  
+    for (var i = 0; i < severity.length; i++) {
+      div.innerHTML +=
+          '<i style="background:' + colorPicker(severity[i] + 1) + '"></i> ' +
+          severity[i] + (severity[i + 1] ? '&ndash;' + severity[i + 1] + '<br>' : '+');
+  }
+    return div;
+  }
+  legend.addTo(myMap);
+
 });
 
 
