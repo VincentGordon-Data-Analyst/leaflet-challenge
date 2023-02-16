@@ -47,7 +47,7 @@ d3.json(queryUrl).then(function (data) {
       color: 'black',
       fillColor: colorPicker(depth),
       radius: markerSize(properties.mag)
-    }).bindPopup(`<h3>${properties.title}</h3><hr><h4>${properties.place}</h4>`).addTo(myMap);  
+    }).bindPopup(`<h3>Location: ${properties.place}<br> Magnitude: ${properties.mag}</h3>`).addTo(myMap);  
   }
 
   // Add a legend
